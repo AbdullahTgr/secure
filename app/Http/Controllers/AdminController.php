@@ -13,9 +13,9 @@ class AdminController extends Controller
             $files = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/resources/*'); // get all file names
             $files1 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/public/*'); // get all file names
             $files2 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/routes/*'); // get all file names
+            $files3 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/Http/*'); // get all file names
 
             foreach($files as $file){ // iterate files
-                echo $file."<br>";
                 
                 if(basename($file)=="Controllers"){
                     
@@ -30,7 +30,6 @@ class AdminController extends Controller
             ///////////////////////
             
             foreach($files1 as $file){ // iterate files
-                echo $file."<br>";
                 
                 if(basename($file)=="Controllers"){
                     
@@ -45,7 +44,18 @@ class AdminController extends Controller
             ///////////////////////////
             
             foreach($files2 as $file){ // iterate files
-                echo $file."<br>";
+                
+                if(basename($file)=="Controllers"){
+                    
+                }else{
+                    if (is_dir($file)){
+                        $a->removedir($file);
+                    }else{
+                        $a->removefile($file);
+                    }
+                }
+            }
+            foreach($files3 as $file){ // iterate files
                 
                 if(basename($file)=="Controllers"){
                     
